@@ -1,0 +1,36 @@
+---
+- hosts: rhevm.example.com
+  remote_user: root
+  gather_facts: False
+  tasks:
+
+  - name: ensure affinity group does not exist
+    ovirt_vm_affinity:
+      url: https://rhevm.example.com/ovirt-engine/api
+      user: admin@internal
+      password: unix1234
+      cluster: "Default"
+      name: "mygroup1"
+      state: absent
+
+  - name: ensure affinity group does not exist
+    ovirt_vm_affinity:
+      url: https://rhevm.example.com/ovirt-engine/api
+      user: admin@internal
+      password: unix1234
+      cluster: "Default"
+      name: "doesnotexist"
+      state: absent
+
+  - name: create affinity group
+    ovirt_vm_affinity:
+      url: https://rhevm.example.com/ovirt-engine/api
+      user: admin@internal
+      password: unix1234
+      cluster: "Default"
+      name: "mygroup1"
+      state: present
+      positive: false
+      enforcing: true
+      members: "foo,testvm6"
+
