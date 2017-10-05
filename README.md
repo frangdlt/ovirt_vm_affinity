@@ -15,6 +15,9 @@ An oVirt/Red Hat Enterprise Virtualization manager 3.x (this module is **not** s
 ansible-playbook -i your-rhev-manager, test_affinity_groups.yml
 ```
 
+Sample playbook snippet:
+
+```
   - name: ensure affinity group does not exist
     ovirt_vm_affinity:
       url: https://rhevm.example.com/ovirt-engine/api

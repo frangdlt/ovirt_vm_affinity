@@ -56,13 +56,12 @@ def create_affinity_group(api, cluster, name, description, positive, enforcing, 
     enforcing = enforcing in ["True", 'true']
     c = api.clusters.get(name=cluster)
     ag = c.affinitygroups.add(params.AffinityGroup(name=name, positive=positive, enforcing=enforcing))
-    #ug = c.affinitygroups.add(Name="mygroup1", Positive=False, Enforcing=True)
     if members is None:
       module.fail_json(msg='members is not initialized')
     for name in members:
       vm = api.vms.get(name=name)
       if vm is None:
-        module.fail_json(msg='cannot find vm %s -- ' % (name))
+        module.fail_json(msg='cannot find vm: %s' % (name))
       ag.vms.add(vm)
     changed = True
 
@@ -95,7 +94,6 @@ def main():
     if name == '' or cluster == '' or state not in ["present", "absent"]:
       module.fail_json(msg='name, cluster or state parameters are missing or invalid')
    
-
     if state == "absent":
       delete_affinity_group(api, cluster, name)
 
