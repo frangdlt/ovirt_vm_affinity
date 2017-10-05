@@ -37,6 +37,5 @@ Sample playbook snippet:
       state: present
       positive: false
       enforcing: true
-      members: "foo,testvm6"
+      members: "vm1,vm2"
 ```
-
